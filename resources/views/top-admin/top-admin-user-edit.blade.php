@@ -34,7 +34,8 @@
                                         <select name="departmentOfUser">
                                                 <option>--部署を選択してください--</option>
                                             @foreach($getDepartments as $departmentName)
-                                                <option value="{{ $departmentName->name }}">{{ $departmentName->name }}</option>
+                                                <option value="{{ $departmentName->name }}" @if($departmentName->name == $UserDataFromId['0']->departmentName) selected @endif>
+                                                    {{ $departmentName->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>

@@ -9,7 +9,8 @@
         <div class="py-12 w-70vw">
             <div class="max-w-5-5xl mr-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 bg-white border-b border-gray-200">
+                    <div class="p-6 bg-white border-b border-gray-200 text-center">
+                        <p>ユーザー一覧</p>
                     </div>
                 </div>
             </div>

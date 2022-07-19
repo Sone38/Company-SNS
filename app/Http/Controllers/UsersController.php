@@ -15,6 +15,7 @@ class UsersController extends Controller
         $users = DB::table('users')
                     ->leftJoin('departments', 'users.department_id', '=', 'departments.id')
                     ->select('users.id', 'users.name AS userName', 'users.kana', 'departments.name AS departmentName')
+                    ->orderBy('users.id')
                     ->paginate(8);
 
         return view('top-admin.top-admin-user', compact('users'));
@@ -25,6 +26,7 @@ class UsersController extends Controller
         $users = DB::table('users')
                     ->leftJoin('departments', 'users.department_id', '=', 'departments.id')
                     ->select('users.id', 'users.name AS userName', 'users.kana', 'departments.name AS departmentName')
+                    ->orderBy('users.id')
                     ->paginate(8);
 
         return view('general-user', compact('users'));

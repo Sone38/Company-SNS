@@ -11,8 +11,10 @@
                 @foreach($posts as $posts)
                 <div class="posts bg-white overflow-hidden shadow-sm sm:rounded-lg p-6 bg-white border-b border-gray-200 post-form">
                     <div class="postTitle">
-                        <p class="post-date">{{ $posts['created_at'] }}</p>
-                        <h3>{!! nl2br(e($posts['post_title'])) !!}</h3>
+                        <div>
+                            <p class="post-date">{{ $posts['created_at'] }}</p>
+                            <h3>{!! nl2br(e($posts['post_title'])) !!}</h3>
+                        </div>
                     </div>
                     <div class="post-content">
                         <p>{!! nl2br(e($posts['post_content'])) !!}</p>
