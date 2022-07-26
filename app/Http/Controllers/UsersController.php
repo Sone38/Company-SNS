@@ -49,8 +49,8 @@ class UsersController extends Controller
                             ->where('users.id', '=', $id)
                             ->select('users.id', 'users.name AS userName', 'users.kana', 'users.email', 'departments.name AS departmentName')
                             ->get();
-        
-        //dd($UserDataFromId);                    
+
+        //dd($UserDataFromId);
         return view('top-admin.top-admin-user-edit', compact('UserDataFromId', 'getDepartments'));
     }
 
@@ -90,5 +90,15 @@ class UsersController extends Controller
         $editedUserInformation->save();
 
         return redirect(route('top-admin-user'));
+    }
+
+    // ユーザーの検索
+    public function getUserBySearchName(Request $request) {
+        $resultOfSearch = DB::table('users')->where('name', 'like', "%{$request->name}%")->get();
+
+        return response()->json([
+            'resultOfSearch' => $resultOfSearch,
+        ]);
+
     }
 }

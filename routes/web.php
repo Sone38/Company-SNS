@@ -86,6 +86,8 @@ Route::group(['prefix' => 'top-admin', 'middleware' => ['auth', 'can:top-admin']
     Route::get('top-admin-user-edit/{id}', [UsersController::class, 'UserDataFromId'])->name('top-admin-user-edit');
     Route::post('top-admin-user-edit/{id}', [UsersController::class, 'EditUserInformationStore'])->name('top-admin-user-edit-post');
     Route::get('top-admin-user-delete/{id}', [User::class, 'userDelete'])->name('top-admin-user-delete');
+    // ユーザー検索機能
+    Route::post('top-admin-user', [UsersController::class, 'getUserBySearchName'])->name('searchUser');
 
     // お問い合わせ機能ページ
     Route::get('top-admin-form', [ContactsController::class, 'GetFormDataFromDatabase'])->name('top-admin-form');

@@ -1,5 +1,7 @@
 // 自作のjqueryを記述
 
+const { countBy } = require("lodash");
+
 //const { dump } = require("laravel-mix");
 
 
@@ -47,7 +49,67 @@ $(function() {
     });
 });
 
+// 検索機能
+$(function() {
+    var searchUserByName;
+
+    $('#search-user-submit').on('click', function() {
+        searchUserByName = $('#search-user').val();
+
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "/top-admin/top-admin-user",
+            type: "POST",
+            dataType: "json",
+            data: {
+                'name': searchUserByName,
+            },
+        }).done(function(json) {
+            /* 使えないもの
+            $.each(json['resultOfSearch'], function(property, value) {
+                alert("名前:" + value.name + "フリガナ:" + value.kana + "メールアドレス" + value.email);
+            })
+            */
+            for($i = 0; $i < json['resultOfSearch'].length; $i++){
+                //alert(JSON.stringify(json['resultOfSearch'][$i]['name']));
+                console.log(JSON.stringify(json['resultOfSearch'][$i]['name']));
+            }
+            //alert(json['resultOfSearch'].length);
+            //alert(JSON.stringify(json['resultOfSearch'][1]));
+            //alert("成功");
+        }).fail(function(err) {
+            alert('失敗');
+        });
+
+        return false;
+
+    });
+});
+
 // チャット機能のjs
+/**
+
+$('#chatMessageSend').on('click', function() {
+
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: '/general/chat',
+        type: 'POST',
+        data: {
+            message: $('#chat_message'),
+        }
+    }).done(function() {
+        alert('成功');
+    }).fail(function() {
+        alert('失敗');
+    });
+})
+
+*/
 
 //$(function() {
 //    $("#chatMessageSend").on('click', function() {
@@ -69,18 +131,5 @@ $(function() {
 //    });
 //});
 
+// ユーザー情報の検索機能
 
-
-//$.ajax({
-//    type: 'GET',
-//    url: '/general/test', // url: は読み込むURLを表す
-    //dataType: 'html', // 読み込むデータの種類を記入
-//}).done(function (results) {
-    // 通信成功時の処理
-//    $('#text').html(results);
-//}).fail(function (err) {
-    // 通信失敗時の処理
-//    alert('ファイルの取得に失敗しました。');
-//});
-
-// チャット機能

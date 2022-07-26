@@ -22,6 +22,9 @@
         <script src="{{ mix('js/ajax.js') }}" defer></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+        <!-- ajax csrf-token -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">

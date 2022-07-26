@@ -11,6 +11,11 @@
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200 text-center">
                         ユーザー一覧
+                        <div class="search-user">
+                            <input type="text" name="search-user" id="search-user" data-value="{{ request('search-user') }}">
+                            <button type="submit" name="search-user-submit" id="search-user-submit">検索</button>
+                        </div>
+                        <div class="resultOfSearch"></div>
                     </div>
                 </div>
             </div>
