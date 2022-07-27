@@ -11,6 +11,10 @@ class Post extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected $fillable = [
+        'img_path',
+    ];
+
     /**
      * users_tableとのリレーション（従テーブル側）
      */

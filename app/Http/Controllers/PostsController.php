@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\Like;
+use App\Models\Post_img;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -20,6 +21,7 @@ class PostsController extends Controller
     public function topIndex() {
         //全ての投稿を取得
         $posts = Post::orderBy('created_at', 'desc')->get();
+        //dd($posts);
 
         return view('top-admin.top-admin-main', compact('posts'));
     }
@@ -82,19 +84,40 @@ class PostsController extends Controller
             ->withErrors($validator);
         }
 
-        // 登録処理
+        // 文章の登録処理
         $posts = new Post;
         $posts->post_title = $request->post_title;
         $posts->post_content = $request->post_content;
         $posts->user_id = Auth::id();
+        // 画像の保存処理
+        $img = $request->file('img_path');
+        $path = $img->store('img', 'public');
+        $posts->img_path = $path;
         $posts->save();
+
+        // 画像の登録処理
+        // $img = $request->file('img_path');
+        // // 画像情報がセットされていたら
+        // if(isset($img)) {
+        //     // storage > public > img配下に画像が保存される
+        //     $path = $img->store('img', 'public');
+        //     //dd($path);
+        //     // store処理が実行できたらDBに保存処理
+        //     if($path) {
+        //         // DBへの登録
+        //         Post::create([
+        //             'img_path' => $path,
+        //         ]);
+        //     }
+
+        // }
 
         return redirect(route('top-admin-main'));
     }
 
     public function edit($id) {
         $post = Post::find($id);
-        
+
         return view('/top-admin/top-admin-post-edit', compact('post'));
     }
 
@@ -119,7 +142,7 @@ class PostsController extends Controller
         $edited->user_id = Auth::id();
         $edited->save();
         $request->flush();
-        
+
         return redirect(route('top-admin-main'));
     }
 }

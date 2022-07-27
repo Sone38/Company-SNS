@@ -24,6 +24,9 @@
                     <div class="post-content">
                         <p>{!! nl2br(e($posts->post_content)) !!}</p>
                     </div>
+                    @if($posts->img_path != null)
+                        <img src="{{ Storage::url($posts->img_path) }}" width="25%">
+                    @endif
                 </div>
                 @endforeach
             </div>

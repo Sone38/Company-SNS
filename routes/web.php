@@ -14,6 +14,7 @@ use App\Models\Contact;
 use App\Models\Department;
 
 use App\Events\Message;
+use App\Http\Controllers\Post_imgesController;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -102,6 +103,13 @@ Route::group(['prefix' => 'top-admin', 'middleware' => ['auth', 'can:top-admin']
     Route::get('top-admin-post-edit/{id}', [PostsController::class, 'edit'])->name('top-admin-post-edit');
     Route::post('top-admin-post-edit/{id}', [PostsController::class, 'editComplete'])->name('top-admin-post-edit');
     Route::get('top-admin-post-delete/{id}', [Post::class, 'postDelete'])->name('top-admin-post-delete');
+
+    // 画像投稿機能の追加
+    /*
+    Route::get('top-admin-main', [Post_imgesController::class, 'index']);
+    Route::get('top-admin-post', [Post_imgesController::class, 'create']);
+    Route::post('top-admin-store', [Post_imgesController::class, 'store']);
+    */
 
     // 部署登録等機能ページ
     Route::get('top-admin-department', [DepartmentsController::class, 'GetDepartmentData'])->name('top-admin-department');
